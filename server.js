@@ -10,12 +10,6 @@ const expressWs = require('express-ws');
 const { v4: uuidv4 } = require('uuid');
 const archiver = require('archiver');
 const os = require('os');
-require('dotenv').config();
-const discordBotToken = process.env.DISCORD_BOT_TOKEN;
-const discordChannelId = process.env.DISCORD_CHANNEL_ID;
-
-
-const PORT = process.env.PORT || 3030;
 
 const app = express();
 expressWs(app);
@@ -29,7 +23,7 @@ const client = new Client({
   intents: ['GUILDS', 'GUILD_MESSAGES'],
 });
 
-client.login(discordBotToken);
+client.login("MTE4MTE4NTg2NTE3NTgwMTg1Ng.GuNYwf.JKQfiGXt2FKiK3x5HBJqdrRJsZifN6Xc7bSUC0");
 
 // WebSocket connections
 const wsClients = [];
@@ -50,8 +44,6 @@ app.ws('/upload-progress', (ws, req) => {
     }
   });
 });
-
-
 
 // Upload route for folders
 
@@ -178,7 +170,7 @@ app.get('/list-files', (req, res) => {
 
 async function listFilesInDiscord(client, res, sortBy, sortOrder) {
   try {
-    const channel = await client.channels.fetch(discordChannelId); // Replace with your channel ID
+    const channel = await client.channels.fetch("1182708027502112818"); // Replace with your channel ID
     const messages = await channel.messages.fetch();
 
     const filesMap = new Map(); // Use a map to group files by fileId
@@ -240,7 +232,7 @@ app.get('/search-files', (req, res) => {
 
 async function searchFilesInDiscord(client, res, searchInput) {
   try {
-    const channel = await client.channels.fetch(discordChannelId); // Replace with your channel ID
+    const channel = await client.channels.fetch("1182708027502112818"); // Replace with your channel ID
     const messages = await channel.messages.fetch();
 
     const filesMap = new Map(); // Use a map to group files by fileId
@@ -309,7 +301,7 @@ app.delete('/delete/:fileId', (req, res) => {
 
 async function deleteFilesInDiscord(client, fileId, res) {
   try {
-    const channel = await client.channels.fetch(discordChannelId); // Replace with your channel ID
+    const channel = await client.channels.fetch("1182708027502112818"); // Replace with your channel ID
     const messages = await channel.messages.fetch();
 
     // Filter messages that match the provided fileId
@@ -347,7 +339,7 @@ async function deleteFilesInDiscord(client, fileId, res) {
 
 
 async function uploadToDiscord(chunks, wsClients) {
-  const channel = await client.channels.fetch(discordChannelId); // Replace with your channel ID
+  const channel = await client.channels.fetch("1182708027502112818"); // Replace with your channel ID
   const startTime = Date.now();
   const totalSize = chunks.reduce((total, chunk) => total + chunk.chunk.length, 0);
   let uploadedSize = 0;
@@ -410,7 +402,7 @@ async function uploadToDiscord(chunks, wsClients) {
 
 async function downloadFromDiscord(client, fileId, res) {
   try {
-    const channel = await client.channels.fetch(discordChannelId); // Replace with your channel ID
+    const channel = await client.channels.fetch("1182708027502112818"); // Replace with your channel ID
     const messages = await channel.messages.fetch();
 
 
