@@ -445,10 +445,3 @@ async function downloadFromDiscord(client, fileId, res) {
     res.status(500).json({ error: 'Internal Server Error' });
   }
 }
-
-
-// Start the Express server
-app.listen(PORT, () => {
-  console.log(`Server is running at http://localhost:${PORT}`);
-  console.log('Discord bot is ready!');
-});
